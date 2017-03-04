@@ -1,0 +1,32 @@
+version: "3"
+
+services:
+   php-apache:
+     build: .
+     volumes:
+      - ./:/var/www/html/
+     ports:
+      - 8080:80
+     links:
+      - mysql:mysql
+     restart: always
+   
+   mysql:
+     image: mysql
+     volumes:
+      - ./tmp/sql/:/var/lib/mysql
+     environment:
+      - MYSQL_ROOT_PASSWORD=testPassword
+      - MYSQL_DATABASE=testDb
+      - MYSQL_USER=test
+      - MYSQL_PASSWORD=password
+     restart: always
+
+   phpmyadmin:
+     image: phpmyadmin/phpmyadmin:4.6
+     links:
+      - mysql:db
+     ports:
+      - 80:80
+      - 8001:80 
+     restart: always
