@@ -6,7 +6,7 @@ services:
      volumes:
       - ./:/var/www/html/
      ports:
-      - 8080:80
+      - 80:80
      links:
       - mysql:mysql
      restart: always
@@ -27,6 +27,5 @@ services:
      links:
       - mysql:db
      ports:
-      - 80:80
       - 8001:80 
      restart: always
